@@ -350,6 +350,74 @@ Module Module1
 
 #End Region
 
+#Region "Méthodes"
+
+        Console.WriteLine("****************** Méthodes:")
+        ' Méthode: est un ensemble d'instructions réutilisable
+        ' 2 types de méthodes:
+        ' Procédure: méthode qui ne renvoie aucun résultat (sub)
+        ' Fonction: méthode qui renvoie un résultat (function)
+
+        ' Pour créer une méthode, vous aurez besoin d'un module ou d'une classe.
+        ' La notion de module est spécifique à vb
+
+        Afficher()
+        Call Afficher()
+
+        'Le mot clé Call n'est pas nécessaire pour appeler une méthode.
+        'Call ne s'applique qu'aux procédures
+
+        Dim result = Add(10, 5)
+
+        Console.WriteLine($"résultat = {result}")
+
+        'Dim r2 = Call Add(15,15) -> erreur car Call s'applique qu'aux procédures
+
+        Dim myTab() As Integer = {10, 2, 5, 25, 32}
+
+        Afficher(myTab)
+
+        Print(99) ' la méthode prend en compte les valeurs par défaut de alpha et beta
+        Print(77, 11, 42) ' On peut en cas de besoin modifier les valeurs initiales des params optionnels
+
+        Print(55,, 66)
+
+        'Appel d'une méthode avec des paramètres nommés sans tenir compte de leur position dans la méthode
+
+        Print(beta:=44, x:=55, alpha:=66)
+
+        Console.WriteLine(PrixTTC(80))
+        Console.WriteLine(PrixTTC(90))
+        Console.WriteLine(PrixTTC(120))
+
+        'Les params optionnels, permettent de fournir un code facile à étendre, qui ne nécessite pas bcp
+        'de modifications dessus.
+        Console.WriteLine(PrixTTC(80, tva:=0.35))
+
+
+        Dim val1 As Integer = 10, val2 As Integer = 15
+
+        Console.WriteLine($"Avant permutation: val1 = {val1} - val2 = {val2}")
+
+        Permuter(val1, val2)
+
+        Console.WriteLine($"Après permutation: val1 = {val1} - val2 = {val2}")
+
+        Dim monTableau() As Integer = {5, 6}
+
+        ModifierTableau(monTableau)
+
+        Afficher(monTableau)
+
+        Dim produit = 0
+
+        Dim somme1 = Calculs(10, 5, produit)
+
+        Console.WriteLine($"somme = {somme1} - produit = {produit}")
+
+
+#End Region
+
 
         'Maintenir la console active à l'exécution
         Console.ReadKey()
