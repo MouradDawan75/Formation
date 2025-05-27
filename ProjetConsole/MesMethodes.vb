@@ -17,12 +17,14 @@
 
     'Exemple d'une fonction
 
+
     ''' <summary>
     ''' Fonction qui renvoie la somme de 2 entiers
     ''' </summary>
     ''' <param name="x">est un entier</param>
     ''' <param name="y">est un entier</param>
     ''' <returns>renvoie somme de x et y</returns>
+
     Public Function Add(x As Integer, y As Integer) As Integer
         Return x + y
     End Function
@@ -48,7 +50,7 @@
         Return prixHT * (1 + tva)
     End Function
 
-    'Passage de paramètres par réfernce: ByRef ne concerne que les types simples. Car les types complèxes, 
+    'Passage de paramètres par réference: ByRef ne concerne que les types simples. Car les types complèxes, 
     'par définition sont des types réference.
     Public Sub Permuter(ByRef x As Integer, ByRef y As Integer)
         Dim tmp = x
@@ -69,6 +71,75 @@
         'Return produit
     End Function
 
+    'Public Function Soustraction(x As Integer, y As Integer) As Integer
+    '    Return x - y
+    'End Function
 
+    'Public Function Soustraction(x As Integer, y As Integer, z As Integer) As Integer
+    '    Return x - y - z
+    'End Function
+
+    'ParamArray: permet de définir une méthode avec un nombre variable de params
+    Public Function Soustraction(ParamArray t As Integer()) As Integer
+
+        Dim r = t(0)
+        For index = 1 To t.Length - 1
+            r -= t(index) ' r = r - t(index)
+        Next
+
+        Return r
+
+    End Function
+
+    'Méthode récursive
+    Public Function Factoriel(x As Integer) As Integer
+        If x = 0 Then
+            Return 1
+        Else
+            Return x * Factoriel(x - 1)
+        End If
+    End Function
+
+    'Méthode qui prend en param d'autres méthodes
+
+    Public Sub TestMethode(x As Integer, y As Integer, traitement As Func(Of Integer, Integer, Integer), print As Action(Of Integer))
+        Dim r = traitement(x, y)
+        print(r)
+    End Sub
+
+    'Méthode qui renvoie la somme des éléments d'un tableau d'entiers
+
+    Public Function SommeTableau(tab As Integer()) As Integer
+
+        Dim resultat = 0
+
+        For Each e In tab
+            resultat += e
+        Next
+
+
+        Return resultat
+
+    End Function
+
+    'Méthode qui renvoie la moyenne des éléments d'un tableau d'entiers
+
+    Public Function MoyenneTableau(tab As Integer()) As Double
+        Return SommeTableau(tab) / tab.Length
+    End Function
+
+    'Méthode qui renvoie l'élément le plus petit d'un tableau d'entiers
+
+    Public Function MinTableau(tab As Integer()) As Integer
+        Dim min = Integer.MaxValue
+
+        For Each e In tab
+            If e < min Then
+                min = e
+            End If
+        Next
+
+        Return min
+    End Function
 
 End Module

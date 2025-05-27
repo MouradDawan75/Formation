@@ -415,12 +415,145 @@ Module Module1
 
         Console.WriteLine($"somme = {somme1} - produit = {produit}")
 
+        Console.WriteLine(Soustraction(1, 2))
+        Console.WriteLine(Soustraction(1, 2, 3))
+        Console.WriteLine(Soustraction(1, 2, 3, 4))
+
+        Dim FuncProduit As Func(Of Integer, Integer, Integer) = Function(a, b) a * b
+
+        Dim AfficherChaine As Action(Of String) = Sub(texte) Console.WriteLine(texte)
+
+        AfficherChaine("Dawan")
+
+        Dim IsPositif As Predicate(Of Integer) = Function(number) number > 0
+
+        'Func: pour les fonctions
+        'Action: pour les Sub
+        'Predicate: pour les fonctions qui renvoient un boolean
+
+        TestMethode(5, 6, Function(a, b) a * b, Sub(rs) Console.WriteLine(rs))
+        TestMethode(5, 6, Function(a, b) a + b, Sub(rs) Console.WriteLine($"somme= {rs} save in file"))
+        TestMethode(5, 6, Function(a, b) a - b, Sub(rs) Console.WriteLine(rs))
+
+        Dim t() As Integer = {11, 7}
+
+        Console.WriteLine($"Somme tableau = {SommeTableau(t)}")
+        Console.WriteLine($"Moyenne tableau = {MoyenneTableau(t)}")
+        Console.WriteLine($"Min tableau = {MinTableau(t)}")
+
+        Console.WriteLine($"min = {t.Min()}")
+
+
+
+
+
+
+#End Region
+
+#Region "Exceptions"
+
+        Console.WriteLine("****************** Exceptions")
+        ' Il existe 3 types d'erreurs possibles dans un code:
+        ' Erreur de compilation: sont détectées automatiquement par l'IDE
+        ' Exceptions: sont des erreurs qui provoquent l'arrêt de l'application
+        ' Code fonctionnel qui renvoi un résultat -> faire du debuggage
+
+        ' Pour éviter l'arrêt de l'application, l'exception doit être gérée
+        ' Pour une exception, on utilise le bloc try/catch
+
+        Dim value = 0
+        Dim tb() As Integer = {10, 20}
+
+        ' Il existe plusieurs types d'exceptions, chacune d'elle porte le nom de l'erreur qu'elle génère.
+        ' Il existe aussi un type anonyme (type générique) qui est Exception
+
+        Try
+            Console.WriteLine(tb(2))
+            Console.WriteLine(value \ 0)
+
+
+        Catch ex As DivideByZeroException
+            Console.WriteLine("Exception gérée")
+            Console.WriteLine(ex.Message)
+            Console.WriteLine(ex.StackTrace)
+
+        Catch ex1 As IndexOutOfRangeException
+            Console.WriteLine("Exception du tableau gérée............")
+        End Try
+
+        Console.WriteLine(">>>>>>>>>>>>>>>>> Exception générique:")
+
+        Try
+
+            Console.WriteLine(value \ 0)
+            Console.WriteLine(tb(2))
+
+        Catch ex1 As Exception
+            Console.WriteLine("Exception gérée............")
+            Console.WriteLine(ex1.Message)
+        End Try
+
+        'Obligation: une ressource (fichiers, base de données.....) doit être libérée à la fin de son utilisation
+
+        'Bonne pratique: prévoir un try/catch lors de la manipulation de ressources
+
+        Try
+            ' Ouverture d'un fichier
+            Console.WriteLine(value \ 2)
+            Console.WriteLine(tb(0))
+
+
+        Catch ' syntaxe simplifiée de l'utilisation du type générique
+            Console.WriteLine(">>> catch générique.....")
+        Finally
+            'Bloc optionnel qui s'exécute tout le temps: exception ou pas
+            Console.WriteLine("*********************** bloc finally")
+            ' fermeture du fichier
+            ' Ce bloc sert dans la pratique à libérer es ressources utilisées dans le try
+
+        End Try
+
+        Try
+            Divide(0)
+        Catch ex As Exception
+            'Remplir un fichier de logs
+            'Remplir une table de logs en BD
+
+        End Try
+
+
+
+        Console.WriteLine(">>>> suite du programme..........")
 
 #End Region
 
 
+
         'Maintenir la console active à l'exécution
         Console.ReadKey()
+
+    End Sub
+
+    ''' <summary>
+    ''' Méthode qui génère une exception si le param x = 0
+    ''' </summary>
+    ''' <param name="x"></param>
+    ''' <exception cref="Exception"></exception>
+    Sub Divide(x As Integer)
+        'Option1: la méthode gère sa propre exception
+        'Try
+        '    Console.WriteLine(10 \ x)
+        'Catch ex As Exception
+        '    Console.WriteLine(">> exception gérée par la méthode......")
+        'End Try
+
+        'Option2: faire une remontée d'exception - c'est aux appelants de gérer l'eventuelle exception
+        If x <> 0 Then
+            Console.WriteLine(10 \ x)
+        Else
+            'Throw: mot clé permettant de déclencher une exception
+            Throw New Exception("Attention, tentative de division par 0")
+        End If
 
     End Sub
 
