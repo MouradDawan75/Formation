@@ -527,6 +527,118 @@ Module Module1
 
 #End Region
 
+#Region "Collections"
+
+        'Les tableaux permettent de gérer un nombre limités d'objets.
+        'Les collections de .net, sont des tableaux dynamiques classés par type de stockage:
+        ' Stockage tableau:
+        ' ArrayList: tableau générique. Peut contenir tout type d'objet
+        ' List(of type): tableau qui ne peut contenir qu'un seul type d'objet
+        ' Stack (pile): stockage LIFO  Last In First Out
+        ' Queue (file): stockage FIFO First In First Out
+
+        ' Stockage cle:valeur
+        ' Dictionary:
+
+        Console.WriteLine(">>>>>>>>>>>>> ArrayList:")
+        Dim myArrayList As ArrayList = New ArrayList()
+
+        Console.WriteLine($" Taille = {myArrayList.Count}")
+
+        ' Ajouts: Add, Insert, AddRange, InsertRange
+        myArrayList.Add(10)
+        myArrayList.Add("test") ' index  = 1
+        myArrayList.Add(True)
+
+        Dim index_test = myArrayList.IndexOf("test")
+
+        myArrayList.Insert(index_test, 15.5)
+
+        Console.WriteLine($"index de test: {myArrayList.IndexOf("test")}")
+
+        Dim otherArray As New ArrayList()
+
+        otherArray.Add("chaine1") '0
+        otherArray.Add("chaine2")
+
+        myArrayList.AddRange(otherArray)
+
+        Console.WriteLine($"Index de chaine1 dans myArrayList: {myArrayList.IndexOf("chaine1")}") '4
+
+        ' Modifications:
+        myArrayList(0) = 99
+
+        Console.WriteLine($"Modification index 0: {myArrayList(0)}")
+
+        ' Suppressions:
+        Console.WriteLine($"myArrayList contient test ? {myArrayList.Contains("test")}") 'true
+
+        myArrayList.Remove("test")
+
+        Console.WriteLine($"myArrayList contient test après remove ? {myArrayList.Contains("test")}") 'false
+
+        myArrayList.Add(55)
+        myArrayList.Add(55)
+        myArrayList.Add(55)
+
+        'myArrayList.Remove(55)
+
+        ' Suppression de toutes les occurrences de 55
+
+        'For Each e In myArrayList
+        '    If TypeOf (e) Is Integer Then ' ArrayList contient d'autres types d'objets
+        '        Dim convert As Integer = CInt(e)
+        '        If convert = 55 Then
+        '            myArrayList.Remove(convert)
+        '        End If
+
+        '    End If
+        'Next
+
+        ' Boucle for inversée
+
+        For index = myArrayList.Count - 1 To 0
+
+            If TypeOf (myArrayList(index)) Is Integer Then
+                'conversion en Integer
+                Dim conv As Integer = CInt(myArrayList(index))
+                If conv = 55 Then
+                    myArrayList.RemoveAt(index)
+                End If
+            End If
+
+        Next
+
+        myArrayList.AfficherContenu()
+
+        'For Each e1 In myArrayList
+        '    Console.WriteLine(e1)
+        'Next
+
+        'Pour définir une méthode d'exyension d'un type de données:
+        '1- Créer un module (ArrayListExtension)
+        '2- Définir une méthode dont le premier paramètre est du type qu'on souhaite étendre (type complèxe) 
+        '3- Ajouter l'annotation <Extension> au dessus de la méthode
+
+        'Enumerator est un objet permettant de faire des itérations sur une collection avec la possibilté
+        ' de le positionner dans la collection: MoveNext() - Reset() -> c'est une sorte de curseur 
+        ' qui pointe vers les éléments de la collection
+        Dim enumerator = myArrayList.GetEnumerator()
+
+
+
+        While enumerator.MoveNext()
+            Console.WriteLine(enumerator.Current)
+        End While
+
+        Dim couleur = Couleurs.ROUGE
+
+
+
+#End Region
+
+
+
 
 
         'Maintenir la console active à l'exécution
@@ -556,5 +668,13 @@ Module Module1
         End If
 
     End Sub
+
+    Public Enum Couleurs
+        BLANC = 10
+        NOIR
+        JAUNE
+        ROUGE
+    End Enum
+
 
 End Module

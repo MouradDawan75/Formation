@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{A97F76FC-10E1-427D-8484-924A23D566FD}</ProjectGuid>
+    <ProjectGuid>{2D5BDA8D-2180-4D79-9201-9132F6271F34}</ProjectGuid>
     <OutputType>Exe</OutputType>
-    <StartupObject>ProjetConsole.Module1</StartupObject>
-    <RootNamespace>ProjetConsole</RootNamespace>
-    <AssemblyName>ProjetConsole</AssemblyName>
+    <StartupObject>Demo_Debug.Module1</StartupObject>
+    <RootNamespace>Demo_Debug</RootNamespace>
+    <AssemblyName>Demo_Debug</AssemblyName>
     <FileAlignment>512</FileAlignment>
     <MyType>Console</MyType>
     <TargetFrameworkVersion>v4.8.1</TargetFrameworkVersion>
@@ -22,10 +22,8 @@
     <DefineDebug>true</DefineDebug>
     <DefineTrace>true</DefineTrace>
     <OutputPath>bin\Debug\</OutputPath>
-    <DocumentationFile>ProjetConsole.xml</DocumentationFile>
-    <NoWarn>
-    </NoWarn>
-    <WarningsAsErrors>41999,42016,42017,42018,42019,42020,42021,42022,42032,42036</WarningsAsErrors>
+    <DocumentationFile>Demo_Debug.xml</DocumentationFile>
+    <NoWarn>42016,41999,42017,42018,42019,42032,42036,42020,42021,42022</NoWarn>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -34,10 +32,8 @@
     <DefineTrace>true</DefineTrace>
     <Optimize>true</Optimize>
     <OutputPath>bin\Release\</OutputPath>
-    <DocumentationFile>ProjetConsole.xml</DocumentationFile>
-    <NoWarn>
-    </NoWarn>
-    <WarningsAsErrors>41999,42016,42017,42018,42019,42020,42021,42022,42032,42036</WarningsAsErrors>
+    <DocumentationFile>Demo_Debug.xml</DocumentationFile>
+    <NoWarn>42016,41999,42017,42018,42019,42032,42036,42020,42021,42022</NoWarn>
   </PropertyGroup>
   <PropertyGroup>
     <OptionExplicit>On</OptionExplicit>
@@ -46,7 +42,7 @@
     <OptionCompare>Binary</OptionCompare>
   </PropertyGroup>
   <PropertyGroup>
-    <OptionStrict>On</OptionStrict>
+    <OptionStrict>Off</OptionStrict>
   </PropertyGroup>
   <PropertyGroup>
     <OptionInfer>On</OptionInfer>
@@ -73,10 +69,9 @@
     <Import Include="System.Threading.Tasks" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ArrayListExtension.vb" />
-    <Compile Include="MesEnums.vb" />
-    <Compile Include="MesMethodes.vb" />
     <Compile Include="Module1.vb" />
+    <Compile Include="ModuleA.vb" />
+    <Compile Include="ModuleB.vb" />
     <Compile Include="My Project\AssemblyInfo.vb" />
     <Compile Include="My Project\Application.Designer.vb">
       <AutoGen>True</AutoGen>
@@ -112,12 +107,6 @@
       <LastGenOutput>Settings.Designer.vb</LastGenOutput>
     </None>
     <None Include="App.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\ProjetDLL\ProjetDLL.vbproj">
-      <Project>{0b9389bb-561e-4afd-ab41-a33ce7a7ef75}</Project>
-      <Name>ProjetDLL</Name>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
 </Project>
