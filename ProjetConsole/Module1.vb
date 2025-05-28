@@ -625,13 +625,83 @@ Module Module1
         ' qui pointe vers les éléments de la collection
         Dim enumerator = myArrayList.GetEnumerator()
 
-
-
         While enumerator.MoveNext()
             Console.WriteLine(enumerator.Current)
         End While
 
+        'Utilisation des Enums définie dans le module: MesEnums
+
         Dim couleur = Couleurs.ROUGE
+        Dim erreur = Erreurs.MINEURE
+
+        Console.WriteLine(">>>>>>>>>>>> List:")
+
+        Dim lst As New List(Of Integer)
+
+        ' On a les même méthodes que celles d'un ArrayList à la seule différence qu'une ne peut contenir
+        ' qu'un seul type d'objet
+
+        Console.Write(">>>>>>>>>> Stack (pile):")
+        ' Stockage: LIFO -> Last In First Out
+
+        Dim pileGenerique As New Stack() ' tout type d'objets
+
+        pileGenerique.Push(10)
+        pileGenerique.Push("test")
+
+        Dim pile As New Stack(Of String) ' 1 seul type d'objet
+
+        pile.Push("chaine1")
+        pile.Push("chaine2")
+        pile.Push("chaine3")
+
+        Console.WriteLine($"Taille: {pile.Count}")
+
+        Console.WriteLine($"pile contient chaine3 ? {pile.Contains("chaine3")}") 'true
+
+        pile.Pop() ' supprime le dernier élément par défaut
+
+        Console.WriteLine($"pile contient chaine3 après pop ? {pile.Contains("chaine3")}") ' false
+
+        Console.WriteLine($"Prochaine chaine à supprimer: {pile.Peek()}")
+
+        Console.WriteLine(">>>>>>>>> Queue (file d'attente)")
+        'Stockage FIFO: First In First Out
+
+        Dim fileGenerique As New Queue() ' tout type d'objets
+        Dim file As New Queue(Of Integer)
+
+        'Ajout
+        file.Enqueue(10)
+        file.Enqueue(20)
+        file.Enqueue(30)
+
+        Console.WriteLine($"file contient 10 ? {file.Contains(10)}") ' true
+
+        file.Dequeue()
+
+        Console.WriteLine($"file contient 10 après dequeue ? {file.Contains(10)}") ' false
+
+        Console.WriteLine($"Prochain élément à supprimer: {file.Peek()}")
+
+        Console.WriteLine(">>>>>>>>>>>> Dictionary:")
+
+        ' Un dictionary fonctionne par association clé:valeur
+
+        Dim myDict As New Dictionary(Of String, String)
+
+        myDict.Add("server", "192.168.10.55")
+        myDict.Add("port", "8085")
+        myDict.Add("user", "admin")
+        myDict.Add("password", "@@pwd@@")
+
+        If myDict.ContainsKey("user") Then
+            Console.WriteLine(myDict.Item("user"))
+        End If
+
+        Console.WriteLine($"Taille: {myDict.Count}")
+
+        Colorer(Couleurs.NOIR)
 
 
 
@@ -668,13 +738,24 @@ Module Module1
         End If
 
     End Sub
-
     Public Enum Couleurs
         BLANC = 10
         NOIR
         JAUNE
         ROUGE
     End Enum
+
+    Public Sub Colorer(couleur As Couleurs)
+
+        Select Case couleur
+            Case Couleurs.BLANC
+                Console.WriteLine("Blanc..........")
+
+            Case Couleurs.NOIR
+                Console.WriteLine("Noir..........")
+        End Select
+
+    End Sub
 
 
 End Module
