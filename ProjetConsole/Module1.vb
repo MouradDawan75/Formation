@@ -708,9 +708,6 @@ Module Module1
 #End Region
 
 
-
-
-
         'Maintenir la console active à l'exécution
         Console.ReadKey()
 
@@ -744,7 +741,6 @@ Module Module1
         JAUNE
         ROUGE
     End Enum
-
     Public Sub Colorer(couleur As Couleurs)
 
         Select Case couleur
